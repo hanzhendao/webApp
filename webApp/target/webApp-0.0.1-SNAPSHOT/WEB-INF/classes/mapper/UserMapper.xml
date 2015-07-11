@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 用户的mybatis -->
+<mapper namespace="user">
+	<select id="getLoginUser" parameterType="map" resultType="UserBean">
+		SELECT u.* FROM USER u
+		WHERE 1=1
+			<if test="userName != null">
+				AND u.USERNAME=#{userName}
+			</if>
+			<if test="password != null">
+				AND u.PASSWORD=#{password}
+			</if>
+	</select>
+	
+	<select id="getUserByUserName" parameterType="map" resultType="com.landao.main.repository.entity.User">
+		SELECT u.* FROM USER u WHERE u.USERNAME=#{userName}
+	</select>
+	
+	<select id="getUserListInPage" resultType="UserBean">
+		SELECT u.* FROM USER u
+	</select>
+	
+	<select id="getUserListInPageCount" resultType="int">
+		SELECT COUNT(u.USERID) FROM USER u
+	</select>
+</mapper> 
